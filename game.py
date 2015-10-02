@@ -60,9 +60,21 @@ class Bloque:
 	def toString(self):
 		return "X: " + str(self.x) + ",Y: " + str(self.y) + ",Last_X: " + str(self.last_x) + ",Last_Y: " + str(self.last_y)
 
+def colocarArboles(screen,arbol):
+	
+	for i in range(0,21):
+		screen.blit(arbol, (i*28,0))
+	for i in range(0,21):
+		screen.blit(arbol, (560,i*28))
+	for i in range(0,21):
+		screen.blit(arbol, (i*28,560))
+	for i in range(0,21):
+		screen.blit(arbol, (0,i*28))
+
+
 def generarFruta(bloques):
 
-	tuple = (random.randint(0,20)*28,random.randint(0,20)*28)	
+	tuple = (random.randint(1,19)*28,random.randint(1,19)*28)	
 	#print str(tuple[0]) + ":" + str(tuple[1])
 	
 	while 1:
@@ -96,13 +108,15 @@ def main():
 	CUERPO = pygame.image.load('cuerpo.png')
 	CABEZA = pygame.image.load('cabeza.png')
 	FRUTA = pygame.image.load('fruta.png')
-	screen = pygame.display.set_mode((560,560))
+	ARBOL = pygame.image.load('arbol.png')
+	screen = pygame.display.set_mode((588,588))
 	bloques = Bloques(Bloque(280,280))
 	pos_fruta = (-1,-1)
 	 
-
+	# INICIALIZAR POSICIONES DE LA PANTALLA 
 	screen.blit(CABEZA, (28,28))
 	screen.blit(CUERPO, (280,308))
+	colocarArboles(screen,ARBOL)
 	bloques.anadirBloque(Bloque(28,308)) #Anadimos nuevo bloque
 	bloques.getUltimoBloque().setBeforeBloque(bloques.getPrimerBloque())
 	pygame.display.flip()
@@ -112,6 +126,7 @@ def main():
 		time.sleep(.2)
 		
 		screen.fill((0,0,0)) 
+		colocarArboles(screen,ARBOL)
 		if((pos_fruta[0] == -1 and pos_fruta[1] == -1)):
 			pos_fruta = generarFruta(bloques)
 			print pos_fruta
@@ -160,7 +175,7 @@ def main():
 			next_x = next_x + 28*DIRECCION[0]
 			next_y = next_y + 28*DIRECCION[1]
 	
-		if(next_x > 560 or next_x < 0 or next_y > 560 or next_y < 0):
+		if(next_x >= 560 or next_x < 28 or next_y >= 560 or next_y < 28):
 			sys.exit()
 
 			
