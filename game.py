@@ -86,6 +86,7 @@ def generarFruta(bloques):
 				break
 			
 		if(not bool):
+
 			tuple = (random.randint(1,19)*28,random.randint(1,19)*28)
 		else:
 			break
@@ -100,8 +101,7 @@ def comprobarChoque(x,y,bloques):
 			break		
 	return choque
 
-def resetearJuego():
-
+#def resetearJuego():
 
 
 def main():
@@ -153,12 +153,11 @@ def main():
 			pos_fruta = generarFruta(bloques)
 			puntuacion = puntuacion + 100
 			LABEL = myfont.render("Score: "+str(puntuacion),1,(255,255,0))
-
 					
 		screen.blit(FRUTA, pos_fruta)
 		next_x = bloques.getPrimerBloque().getX()
 		next_y = bloques.getPrimerBloque().getY()
-		
+	
 		if(comprobarChoque(next_x,next_y,bloques)):
 			if(easygui.ynbox('Total Score: ' + str(puntuacion) + ' . Do you want to play again?','End Game',('Yes','No'))):
 				sys.exit()
