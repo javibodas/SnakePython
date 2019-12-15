@@ -1,4 +1,4 @@
-from snake import main
+from snake import main as snake
 
 
-main()
+snake()
