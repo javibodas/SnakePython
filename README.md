@@ -8,11 +8,9 @@ For run the game it is necesary to have installed Python 3x:
     $ python -V
     Python 3.8.0
 
-The next librarys are also necesary: [easygui](https://pypi.org/project/easygui/), [colorama](https://pypi.org/project/colorama/), [pygame](https://www.pygame.org/news)
+The next librarys are also necesary: [easygui](https://pypi.org/project/easygui/), [pygame](https://www.pygame.org/news)
  
     $ pip install easygui
-
-    $ pip install colorama
 
     $ pip install pygame
 
