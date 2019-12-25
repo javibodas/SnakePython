@@ -93,8 +93,7 @@ def check_collision(xMovement, yMovement):
 			collision = True
 			break
 
-	if xMovement >= _SCREEN_MAX_LIMIT or xMovement < _SCREEN_MIN_LIMIT 
-        or yMovement >= _SCREEN_MAX_LIMIT or yMovement < _SCREEN_MIN_LIMIT:
+	if xMovement >= _SCREEN_MAX_LIMIT or xMovement < _SCREEN_MIN_LIMIT or yMovement >= _SCREEN_MAX_LIMIT or yMovement < _SCREEN_MIN_LIMIT:
 		collision = True
 
 	return collision
@@ -164,10 +163,10 @@ def game():
 			posFruit = generate_fruit()
 
 		elif posFruit[0] == blocks.get_first_block().getX() and posFruit[1] == blocks.get_first_block().getY():
-            b = Block(blocks.get_last_block().getX() - BLOCK_SIZE * _direction[0], blocks.get_last_block().getY() - BLOCK_SIZE * _direction[1])
+			b = Block(blocks.get_last_block().getX() - BLOCK_SIZE * _direction[0], blocks.get_last_block().getY() - BLOCK_SIZE * _direction[1])
 			b.set_before_block(blocks.get_last_block())
-            blocks.add_block(b)
-			#blocks.get_last_block().set_before_block(blocks.get_blocks()[len(blocks.get_blocks()) - 2])
+			blocks.add_block(b)
+		#blocks.get_last_block().set_before_block(blocks.get_blocks()[len(blocks.get_blocks()) - 2])
 			posFruit = generate_fruit()
 			score.points = score.points + 100
 			labelPoints = myfont.render("Score: " + str(score.points) + "  " 
@@ -210,8 +209,7 @@ def game():
 			next_x = next_x + (BLOCK_SIZE * _direction[0])
 			next_y = next_y + (BLOCK_SIZE * _direction[1])
 
-		if (_olderDirection[0] + _direction[0]) == 0 
-            and (_olderDirection[1] + _direction[1]) == 0:  # Event direction equals to current direction. No changes.
+		if (_olderDirection[0] + _direction[0]) == 0 and (_olderDirection[1] + _direction[1]) == 0:  # Event direction equals to current direction. No changes.
 			_direction = [_olderDirection[0],_olderDirection[1]]
 			next_x = next_x + (BLOCK_SIZE * _direction[0])
 			next_y = next_y + (BLOCK_SIZE * _direction[1])
