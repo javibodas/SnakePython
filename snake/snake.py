@@ -42,7 +42,8 @@ def update_body_snake_positions():
 	global blocks
 	global screen
 
-	screen.blit(HEAD, (blocks.get_first_block().getX(), blocks.get_first_block().getY()))
+	screen.blit(HEAD, (blocks.get_first_block().getX(), 
+                        blocks.get_first_block().getY()))
 
 	for block in blocks.get_blocks()[1:]:
 		block.set_last_X(block.getX())
@@ -92,7 +93,8 @@ def check_collision(xMovement, yMovement):
 			collision = True
 			break
 
-	if xMovement >= _SCREEN_MAX_LIMIT or xMovement < _SCREEN_MIN_LIMIT or yMovement >= _SCREEN_MAX_LIMIT or yMovement < _SCREEN_MIN_LIMIT:
+	if xMovement >= _SCREEN_MAX_LIMIT or xMovement < _SCREEN_MIN_LIMIT 
+        or yMovement >= _SCREEN_MAX_LIMIT or yMovement < _SCREEN_MIN_LIMIT:
 		collision = True
 
 	return collision
@@ -104,9 +106,9 @@ def reset_game():
 
 	_direction = [0, -1]
 	_olderDirection = [_direction[0], _direction[1]]
-	if score.get_points() > score.get_max_points():
-		score.set_max_points(score.get_points())
-	score.set_points(0)
+	if score.points > score.max_points:
+		score.max_points = score.points
+	score.points = 0
 	event.clear()
 
 	initialize_game()
@@ -129,7 +131,8 @@ def initialize_game():
 	# INITIALIZE SCREEN POSITIONS
 	screen.blit(HEAD, (BLOCK_SIZE, BLOCK_SIZE))
 	screen.blit(BODY, (START_POSITION[0] - BLOCK_SIZE, START_POSITION[1]))
-	labelPoints = myfont.render("Score: " + str(score.get_points()) + "  " + " Max. Score:" + str(score.get_max_points()), 1, (255, 255, 0))
+	labelPoints = myfont.render("Score: " + str(score.points) + "  " 
+                                + " Max. Score:" + str(score.max_points), 1, (255, 255, 0))
 	screen.blit(labelPoints, (14, 7))
 	paint_trees()
 	blocks.add_block(Block(BLOCK_SIZE, START_POSITION[1] - BLOCK_SIZE))
@@ -157,15 +160,18 @@ def game():
 		screen.fill((0, 0, 0))
 		paint_trees()
 		screen.blit(labelPoints, (14, 7))
-		if posFruit[0] == -1 and posFruit[1] == -1:
+		if posFruit[0] == -1 and posFruit[1] == -1:  # Default fruit position
 			posFruit = generate_fruit()
 
 		elif posFruit[0] == blocks.get_first_block().getX() and posFruit[1] == blocks.get_first_block().getY():
-			blocks.add_block(Block(blocks.get_last_block().getX() - BLOCK_SIZE * _direction[0], blocks.get_last_block().getY() - BLOCK_SIZE * _direction[1]))
-			blocks.get_last_block().set_before_block(blocks.get_blocks()[len(blocks.get_blocks()) - 2])
+            b = Block(blocks.get_last_block().getX() - BLOCK_SIZE * _direction[0], blocks.get_last_block().getY() - BLOCK_SIZE * _direction[1])
+			b.set_before_block(blocks.get_last_block())
+            blocks.add_block(b)
+			#blocks.get_last_block().set_before_block(blocks.get_blocks()[len(blocks.get_blocks()) - 2])
 			posFruit = generate_fruit()
-			score.set_points(score.get_points() + 100)
-			labelPoints = myfont.render("Score: " + str(score.get_points()) + "  " + " Max. Score:" + str(score.get_max_points()), 1, (255, 255, 0))
+			score.points = score.points + 100
+			labelPoints = myfont.render("Score: " + str(score.points) + "  " 
+                                        + " Max. Score:" + str(score.max_points), 1, (255, 255, 0))
 
 		screen.blit(FRUIT, posFruit)
 		next_x = blocks.get_first_block().getX()
@@ -173,44 +179,45 @@ def game():
 
 		eventP = event.poll()
 		if eventP.type == NOEVENT:
-			next_x = next_x + BLOCK_SIZE * _direction[0]
-			next_y = next_y + BLOCK_SIZE * _direction[1]
+			next_x = next_x + (BLOCK_SIZE * _direction[0])
+			next_y = next_y + (BLOCK_SIZE * _direction[1])
 
 		elif eventP.type == KEYDOWN and eventP.key == 275:  # Right direction
 			_direction[0] = 1
 			_direction[1] = 0
-			next_x = next_x + BLOCK_SIZE * _direction[0]
-			next_y = next_y + BLOCK_SIZE * _direction[1]
+			next_x = next_x + (BLOCK_SIZE * _direction[0])
+			next_y = next_y + (BLOCK_SIZE * _direction[1])
 
 		elif eventP.type == KEYDOWN and eventP.key == 276:  # Left direction
 			_direction[0] = -1
 			_direction[1] = 0
-			next_x = next_x + BLOCK_SIZE * _direction[0]
-			next_y = next_y + BLOCK_SIZE * _direction[1]
+			next_x = next_x + (BLOCK_SIZE * _direction[0])
+			next_y = next_y + (BLOCK_SIZE * _direction[1])
 
 		elif eventP.type == KEYDOWN and eventP.key == 274:  # Down direction
 			_direction[0] = 0
 			_direction[1] = 1
-			next_x = next_x + BLOCK_SIZE * _direction[0]
-			next_y = next_y + BLOCK_SIZE * _direction[1]
+			next_x = next_x + (BLOCK_SIZE * _direction[0])
+			next_y = next_y + (BLOCK_SIZE * _direction[1])
 
 		elif eventP.type == KEYDOWN and eventP.key == 273:  # Up direction
 			_direction[0] = 0
 			_direction[1] = -1
-			next_x = next_x + BLOCK_SIZE * _direction[0]
-			next_y = next_y + BLOCK_SIZE * _direction[1]
+			next_x = next_x + (BLOCK_SIZE * _direction[0])
+			next_y = next_y + (BLOCK_SIZE * _direction[1])
 
 		else: # No controlled event
-			next_x = next_x + BLOCK_SIZE * _direction[0]
-			next_y = next_y + BLOCK_SIZE * _direction[1]
+			next_x = next_x + (BLOCK_SIZE * _direction[0])
+			next_y = next_y + (BLOCK_SIZE * _direction[1])
 
-		if (_olderDirection[0] + _direction[0]) == 0 and (_olderDirection[1] + _direction[1]) == 0: # Event direction equals to current direction. No changes.
+		if (_olderDirection[0] + _direction[0]) == 0 
+            and (_olderDirection[1] + _direction[1]) == 0:  # Event direction equals to current direction. No changes.
 			_direction = [_olderDirection[0],_olderDirection[1]]
-			next_x = next_x + BLOCK_SIZE * _direction[0]
-			next_y = next_y + BLOCK_SIZE * _direction[1]
+			next_x = next_x + (BLOCK_SIZE * _direction[0])
+			next_y = next_y + (BLOCK_SIZE * _direction[1])
 
 		if check_collision(next_x, next_y):
-			if ynbox('Total Score: ' + str(score.get_points()) + ' . Do you want to play again?', 'End Game', ('Yes', 'No')):
+			if ynbox('Total Score: ' + str(score.points) + ' . Do you want to play again?', 'End Game', ('Yes', 'No')):
 				break
 			else:
 				score.write_score_file()
