@@ -2,7 +2,7 @@ import os
 import sys
 sys.path.insert(1, './snake/')
 from snake import main as snake
-from easygui import msgbox, buttonbox
+from easygui import buttonbox
 
 current_work_directory = ''
 game_choices = ['Snake', 'Ninguno']
