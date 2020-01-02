@@ -5,16 +5,13 @@ from snake import main as snake
 from easygui import buttonbox
 
 current_work_directory = ''
-game_choices = ['Snake', 'Ninguno']
 difficulty_choices = ["Easy", "Medium","Difficult","Pro"]
 
 if __name__ == '__main__':
     current_work_directory = os.getcwd()
 
-    msg = 'Which game do you want to play?'
-    game = buttonbox(msg, choices=game_choices)
-    msg = 'How are prepared to?'
+    msg = 'WHich difficulty you want?'
+    difficulty = 'Easy'
     difficulty = buttonbox(msg, choices=difficulty_choices)
 
-    if game == 'Snake':
-        snake(difficulty)
+    exit(snake(difficulty))

@@ -219,7 +219,7 @@ def game():
 				break
 			else:
 				score.write_score_file()
-				return()
+				return(0)
 
 		blocks.get_first_block().set_last_X(blocks.get_first_block().getX())
 		blocks.get_first_block().set_last_Y(blocks.get_first_block().getY())
@@ -250,4 +250,4 @@ def main(difficulty):
 		_velocity = .035
 
 	initialize_game()
-	game()
+	return(game())

@@ -61,12 +61,14 @@ class Score:
         except FileNotFoundError:
             file = open(__SCORE_FILE_NAME__, 'x')
             file.write(__SCORE_DEFAULT_STRUCTURE__)
+            file = open(__SCORE_FILE_NAME__, 'r')
 
         try:
             self._data = load(file)
         except JSONDecodeError:
             file = open(__SCORE_FILE_NAME__, 'w')
             file.write(__SCORE_DEFAULT_STRUCTURE__)
+            file = open(__SCORE_FILE_NAME__, 'r')
             self._data = load(file)
 
         self._max_points = int(self._data['DATA'][self._game])
